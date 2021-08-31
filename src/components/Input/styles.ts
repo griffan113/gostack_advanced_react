@@ -1,6 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  isErrored: boolean;
+  isFocused: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   color: #666360;
   background: #232129;
   border-radius: 10px;
@@ -10,6 +15,8 @@ export const Container = styled.div`
 
   display: flex;
   align-items: center;
+
+  transition: 0.2s;
 
   & + div {
     margin-top: 8px;
@@ -29,4 +36,16 @@ export const Container = styled.div`
   svg {
     margin-right: 16px;
   }
+
+  ${props =>
+    props.isErrored &&
+    css`
+      border-color: #c53030;
+    `}
+  ${props =>
+    props.isFocused &&
+    css`
+      color: #ff9000;
+      border-color: #ff9000;
+    `}
 `;
