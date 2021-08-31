@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
+  :root {
+    --primary: #ff9000;
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -17,7 +21,10 @@ export default createGlobalStyle`
   body, input, button {
     font-family: 'Roboto Slab', serif;
     font-size: 16px;
+  }
 
+  a {
+    text-decoration: none;
   }
 
   h1, h2, h3, h4, h5, h6, strong {
