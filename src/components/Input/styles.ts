@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import ToolTip from '../Tooltip';
 
 interface ContainerProps {
   isErrored: boolean;
@@ -48,4 +49,21 @@ export const Container = styled.div<ContainerProps>`
       color: #ff9000;
       border-color: #ff9000;
     `}
+`;
+
+export const Error = styled(ToolTip)`
+  span {
+    background: #c53030;
+    color: #fff;
+
+    &::before {
+      border-color: #c53030 transparent;
+    }
+  }
+  height: 20px;
+  margin-left: 16px;
+
+  svg {
+    margin: 0;
+  }
 `;
