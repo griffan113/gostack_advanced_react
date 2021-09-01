@@ -72,6 +72,7 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-empty-function": "off",
+    "arrow-body-style": "off",
     "@typescript-eslint/ban-types": "off",
 
     "import/no-extraneous-dependencies": [
