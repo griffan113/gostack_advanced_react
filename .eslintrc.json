@@ -71,6 +71,7 @@
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/no-empty-function": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {
