@@ -2,9 +2,10 @@ import React, { useCallback, useRef } from 'react';
 import { FiArrowLeft, FiUser, FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import { Container, Content, Background } from './styles';
+import { Container, Content, Background, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import logo from '../../assets/logo.svg';
@@ -50,25 +51,32 @@ const SignUp: React.FC = () => {
     <Container>
       <Background />
       <Content>
-        <img src={logo} alt="GoBarber" />
-        <Form ref={formRef} onSubmit={handleSubmit} action="">
-          <h1>Faça seu cadastro</h1>
-          <Input icon={FiUser} name="name" placeholder="Nome" />
-          <Input icon={FiMail} name="email" type="email" placeholder="E-mail" />
-          <Input
-            icon={FiLock}
-            name="password"
-            type="password"
-            placeholder="Senha"
-          />
+        <AnimationContainer>
+          <img src={logo} alt="GoBarber" />
+          <Form ref={formRef} onSubmit={handleSubmit} action="">
+            <h1>Faça seu cadastro</h1>
+            <Input icon={FiUser} name="name" placeholder="Nome" />
+            <Input
+              icon={FiMail}
+              name="email"
+              type="email"
+              placeholder="E-mail"
+            />
+            <Input
+              icon={FiLock}
+              name="password"
+              type="password"
+              placeholder="Senha"
+            />
 
-          <Button type="submit">Cadastrar</Button>
-        </Form>
-        <a href="login">
-          {' '}
-          <FiArrowLeft />
-          Voltar para o Log In
-        </a>
+            <Button type="submit">Cadastrar</Button>
+          </Form>
+          <Link to="/">
+            {' '}
+            <FiArrowLeft />
+            Voltar para o Log In
+          </Link>
+        </AnimationContainer>
       </Content>
     </Container>
   );
