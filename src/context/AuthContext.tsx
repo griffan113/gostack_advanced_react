@@ -1,4 +1,5 @@
 import React, { createContext } from 'react';
+import { useContext } from 'react';
 import { useState } from 'react';
 import { useCallback } from 'react';
 
@@ -54,4 +55,12 @@ const AuthProvider: React.FC = ({ children }) => {
   );
 };
 
-export { AuthContext, AuthProvider };
+function useAuth(): AuthContextState {
+  const context = useContext(AuthContext);
+
+  if (!context) throw new Error('useAuth must be used within an AuthProvider');
+
+  return context;
+}
+
+export { AuthProvider, useAuth };
