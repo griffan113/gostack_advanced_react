@@ -12,6 +12,7 @@ import { useToast } from '../../hooks/toast';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import getValidationErrors from '../../utils/getValidationErrors';
+import { api } from '../../services/api';
 
 interface ResetPasswordFormData {
   password: string;
@@ -37,6 +38,8 @@ const ResetPassword: React.FC = () => {
         });
 
         await schema.validate(data, { abortEarly: false });
+
+        api.post('/password/forgot', data);
 
         history.push('/');
       } catch (err: any) {
