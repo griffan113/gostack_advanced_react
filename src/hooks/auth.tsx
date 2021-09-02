@@ -2,12 +2,20 @@ import React, { createContext } from 'react';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { api } from '../services/api';
 
+interface User {
+  id: string;
+  name: string;
+  avatar: string;
+  avatar_url: string;
+}
+
 interface AuthState {
   token: string;
-  user: object;
+  user: User;
 }
 interface ISignInCreadentials {
   email: string;
@@ -15,7 +23,7 @@ interface ISignInCreadentials {
 }
 
 interface AuthContextState {
-  user: object;
+  user: User;
   signIn(data: ISignInCreadentials): Promise<void>;
   signOut(): void;
 }
@@ -23,6 +31,8 @@ interface AuthContextState {
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 const AuthProvider: React.FC = ({ children }) => {
+  const history = useHistory();
+
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@GoBarber:token');
     const user = localStorage.getItem('@GoBarber:user');
@@ -40,6 +50,10 @@ const AuthProvider: React.FC = ({ children }) => {
 
       const { token, user } = response.data;
 
+      const avatar_url = `${api}/files/${user.avatar}`;
+
+      Object.assign(user, { avatar_url });
+
       localStorage.setItem('@GoBarber:token', token);
       localStorage.setItem('@GoBarber:user', JSON.stringify(user));
 
@@ -51,6 +65,8 @@ const AuthProvider: React.FC = ({ children }) => {
   const signOut = useCallback(() => {
     localStorage.removeItem('@GoBarber:token');
     localStorage.removeItem('@GoBarber:user');
+
+    window.location.reload();
   }, []);
 
   return (
