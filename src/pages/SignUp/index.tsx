@@ -1,11 +1,14 @@
 import React, { useCallback, useRef } from 'react';
+import * as Yup from 'yup';
 import { FiArrowLeft, FiUser, FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import { Link } from 'react-router-dom';
-import * as Yup from 'yup';
+import { Link, useHistory } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
 
 import { Container, Content, Background, AnimationContainer } from './styles';
+import { useToast } from '../../hooks/toast';
+import { api } from '../../services/api';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import logo from '../../assets/logo.svg';
@@ -19,6 +22,8 @@ interface SignUpFormData {
 
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const { addToast } = useToast();
+  const history = useHistory();
 
   const handleSubmit = useCallback(
     async (data: SignUpFormData): Promise<void> => {
@@ -36,6 +41,31 @@ const SignUp: React.FC = () => {
         });
 
         await schema.validate(data, { abortEarly: false });
+
+        try {
+          await api.post('/users', data);
+
+          history.push('/');
+
+          addToast({
+            type: 'success',
+            title: 'Cadastro realizado!',
+            description: 'Usuário cadastrado com sucesso!',
+          });
+        } catch (err: any) {
+          if (err instanceof Yup.ValidationError) {
+            const errors = getValidationErrors(err);
+
+            formRef.current?.setErrors(errors);
+            return;
+          }
+
+          addToast({
+            type: 'error',
+            title: 'Erro na cadastro',
+            description: 'Usuário cadastrado com sucesso!',
+          });
+        }
       } catch (err: any) {
         const errors = getValidationErrors(err);
 
@@ -44,7 +74,7 @@ const SignUp: React.FC = () => {
         console.error(err);
       }
     },
-    [],
+    [addToast, history],
   );
 
   return (
