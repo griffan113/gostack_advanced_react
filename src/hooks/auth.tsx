@@ -48,10 +48,6 @@ const AuthProvider: React.FC = ({ children }) => {
 
       const { token, user } = response.data;
 
-      // const avatar_url = `${api}/files/${user.avatar}`;
-
-      // Object.assign(user, { avatar_url });
-
       localStorage.setItem('@GoBarber:token', token);
       localStorage.setItem('@GoBarber:user', JSON.stringify(user));
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { FiClock, FiPower } from 'react-icons/fi';
 
@@ -11,12 +11,15 @@ import {
   Schedule,
   NextAppointment,
   Calendar,
+  Section,
+  Appointment,
 } from './styles';
 import { useAuth } from '../../hooks/auth';
 import logoImg from '../../assets/logo.svg';
 
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
     <Container>
@@ -58,6 +61,71 @@ const Dashboard: React.FC = () => {
               </span>
             </div>
           </NextAppointment>
+
+          <Section>
+            <strong>Manhã</strong>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars.githubusercontent.com/u/70238970?v=4"
+                  alt="Eliel"
+                />
+                <strong>Eliel</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars.githubusercontent.com/u/70238970?v=4"
+                  alt="Eliel"
+                />
+                <strong>Eliel</strong>
+              </div>
+            </Appointment>
+          </Section>
+          <Section>
+            <strong>Tarde</strong>
+
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars.githubusercontent.com/u/70238970?v=4"
+                  alt="Eliel"
+                />
+                <strong>Eliel</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars.githubusercontent.com/u/70238970?v=4"
+                  alt="Eliel"
+                />
+                <strong>Eliel</strong>
+              </div>
+            </Appointment>
+          </Section>
         </Schedule>
         <Calendar />
       </Content>
