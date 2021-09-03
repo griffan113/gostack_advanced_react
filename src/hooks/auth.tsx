@@ -31,8 +31,6 @@ interface AuthContextState {
 const AuthContext = createContext<AuthContextState>({} as AuthContextState);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const history = useHistory();
-
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@GoBarber:token');
     const user = localStorage.getItem('@GoBarber:user');
@@ -50,9 +48,9 @@ const AuthProvider: React.FC = ({ children }) => {
 
       const { token, user } = response.data;
 
-      const avatar_url = `${api}/files/${user.avatar}`;
+      // const avatar_url = `${api}/files/${user.avatar}`;
 
-      Object.assign(user, { avatar_url });
+      // Object.assign(user, { avatar_url });
 
       localStorage.setItem('@GoBarber:token', token);
       localStorage.setItem('@GoBarber:user', JSON.stringify(user));
