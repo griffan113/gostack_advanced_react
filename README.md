@@ -10,7 +10,7 @@
 </div>
 
 <div align="center">
-  <h2>GoBarber is an barber appointment service</h2>
+  <h2>GoBarber is a barber appointment service</h2>
 </div>
 
 <br />
